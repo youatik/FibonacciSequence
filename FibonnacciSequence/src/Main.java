@@ -13,7 +13,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Entrez la valeur de n : ");
         int n = scanner.nextInt();
-        //scanner.close();
+        //scanner.close(); //faut fermer le scanner mais pas ici...
 
         System.out.print("Choisissez la version de Fibonacci (1 pour itérative, 2 pour récursive) : ");
         int choix = scanner.nextInt();
