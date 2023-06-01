@@ -1,27 +1,33 @@
 import java.util.Scanner;
 
-
+/**
+ * Classe principale contenant la méthode main.
+ */
 public class Main {
+    /**
+     * Point d'entrée du programme.
+     *
+     * @param args Les arguments de ligne de commande.
+     */
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter the value of n: ");
+        System.out.print("Entrez la valeur de n : ");
         int n = scanner.nextInt();
         //scanner.close();
 
-        System.out.print("Choose the Fibonacci version (1 for iterative, 2 for recursive): ");
-        int choice = scanner.nextInt();
+        System.out.print("Choisissez la version de Fibonacci (1 pour itérative, 2 pour récursive) : ");
+        int choix = scanner.nextInt();
 
-        int result;
-        if (choice == 1) {
-            result = Fibonacci.fibonacci(n);
-        } else if (choice == 2) {
-            result = FibonacciRecursive.fibonacciRecursive(n);
+        int resultat;
+        if (choix == 1) {
+            resultat = Fibonacci.fibonacci(n);
+        } else if (choix == 2) {
+            resultat = FibonacciRecursive.fibonacciRecursive(n);
         } else {
-            System.out.println("Invalid choice. Please choose 1 or 2.");
+            System.out.println("Choix invalide. Veuillez choisir 1 ou 2.");
             return;
         }
 
-        System.out.println("The " + n + "th Fibonacci number is: " + result);
+        System.out.println("Le " + n + "ème nombre de Fibonacci est : " + resultat);
     }
 }
-
