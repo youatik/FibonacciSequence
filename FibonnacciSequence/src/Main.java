@@ -20,9 +20,11 @@ public class Main {
 
         int resultat;
         if (choix == 1) {
-            resultat = Fibonacci.fibonacci(n);
+            Fibonacci fibonacci = new Fibonacci();
+            resultat = fibonacci.fibonacci(n);
         } else if (choix == 2) {
-            resultat = FibonacciRecursive.fibonacciRecursive(n);
+            FibonacciRecursive fibonacciRecursive = new FibonacciRecursive();
+            resultat = fibonacciRecursive.fibonacci(n);
         } else {
             System.out.println("Choix invalide. Veuillez choisir 1 ou 2.");
             return;
