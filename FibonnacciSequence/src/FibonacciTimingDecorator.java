@@ -7,11 +7,12 @@ public class FibonacciTimingDecorator implements FibonacciInterface {
 
     @Override
     public int fibonacci(int n) {
-        long startTime = System.currentTimeMillis();
+        long startTime = System.nanoTime();
         int result = fibonacciMethod.fibonacci(n);
-        long endTime = System.currentTimeMillis();
+        long endTime = System.nanoTime();
         long executionTime = endTime - startTime;
-        System.out.println("Execution time: " + executionTime + " milliseconds");
+        System.out.println("Execution time: " + executionTime + " nanoseconds");
         return result;
     }
 }
+

@@ -18,18 +18,20 @@ public class Main {
         System.out.print("Choisissez la version de Fibonacci (1 pour itérative, 2 pour récursive) : ");
         int choix = scanner.nextInt();
 
-        int resultat;
+        FibonacciInterface fibonacciMethod;
         if (choix == 1) {
-            Fibonacci fibonacci = new Fibonacci();
-            resultat = fibonacci.fibonacci(n);
+            fibonacciMethod = new Fibonacci();
         } else if (choix == 2) {
-            FibonacciRecursive fibonacciRecursive = new FibonacciRecursive();
-            resultat = fibonacciRecursive.fibonacci(n);
+            fibonacciMethod = new FibonacciRecursive();
         } else {
             System.out.println("Choix invalide. Veuillez choisir 1 ou 2.");
             return;
         }
 
+        FibonacciInterface timedFibonacci = new FibonacciTimingDecorator(fibonacciMethod);
+        int resultat = timedFibonacci.fibonacci(n);
+
         System.out.println("Le " + n + "ème nombre de Fibonacci est : " + resultat);
     }
 }
+
