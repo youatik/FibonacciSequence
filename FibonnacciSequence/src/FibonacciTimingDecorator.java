@@ -1,3 +1,6 @@
+
+//Le décorateur doit être modifé pour mesurer le temps sur un thread
+
 public class FibonacciTimingDecorator implements FibonacciInterface {
     private final FibonacciInterface fibonacciMethod;
     private final String objectName;
