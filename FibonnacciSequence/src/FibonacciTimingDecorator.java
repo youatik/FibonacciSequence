@@ -1,8 +1,10 @@
 public class FibonacciTimingDecorator implements FibonacciInterface {
     private final FibonacciInterface fibonacciMethod;
+    private final String objectName;
 
     public FibonacciTimingDecorator(FibonacciInterface fibonacciMethod) {
         this.fibonacciMethod = fibonacciMethod;
+        this.objectName = fibonacciMethod.getClass().getSimpleName();
     }
 
     @Override
@@ -12,7 +14,7 @@ public class FibonacciTimingDecorator implements FibonacciInterface {
         long endTime = System.nanoTime();
         long executionTime = endTime - startTime;
         String formattedTime = formatExecutionTime(executionTime);
-        System.out.println("Execution time: " + formattedTime);
+        System.out.println("Execution time for " + objectName + ": " + formattedTime);
         return result;
     }
 
