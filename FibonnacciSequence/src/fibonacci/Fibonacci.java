@@ -2,9 +2,20 @@ package fibonacci;
 
 public class Fibonacci implements FibonacciInterface {
     private int calculate(int n) {
-        if (n <= 1)
+        if (n <= 1) {
             return n;
-        return calculate(n - 1) + calculate(n - 2);
+        }
+
+        int prev = 0;
+        int curr = 1;
+
+        for (int i = 2; i <= n; i++) {
+            int next = prev + curr;
+            prev = curr;
+            curr = next;
+        }
+
+        return curr;
     }
 
     @Override
