@@ -1,6 +1,3 @@
-
-//Le décorateur doit être modifé pour mesurer le temps sur un thread
-
 public class FibonacciTimingDecorator implements FibonacciInterface {
     private final FibonacciInterface fibonacciMethod;
     private final String objectName;
@@ -16,20 +13,12 @@ public class FibonacciTimingDecorator implements FibonacciInterface {
         int result = fibonacciMethod.fibonacci(n);
         long endTime = System.nanoTime();
         long executionTime = endTime - startTime;
-        String formattedTime = formatExecutionTime(executionTime);
+
+        TimeFormatter timeFormatter = new TimeFormatter();
+        String formattedTime = timeFormatter.formatExecutionTime(executionTime);
+
         System.out.println("Execution time for " + objectName + ": " + formattedTime);
         return result;
     }
-
-    private String formatExecutionTime(long executionTime) {
-        if (executionTime < 1_000) {
-            return executionTime + " nanoseconds";
-        } else if (executionTime < 1_000_000) {
-            return (executionTime / 1_000) + " microseconds";
-        } else if (executionTime < 1_000_000_000) {
-            return (executionTime / 1_000_000) + " milliseconds";
-        } else {
-            return (executionTime / 1_000_000_000) + " seconds";
-        }
-    }
 }
+
