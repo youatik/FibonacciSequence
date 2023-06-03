@@ -3,7 +3,7 @@ import java.util.Scanner;
 /**
  * Classe principale contenant la méthode main.
  */
-public class MainCorrected {
+public class Main {
     /**
      * Point d'entrée du programme.
      *
