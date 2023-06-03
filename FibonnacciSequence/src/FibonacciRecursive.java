@@ -1,11 +1,6 @@
 public class FibonacciRecursive implements FibonacciInterface {
 
-    /**
-     * Calcule le nième nombre de Fibonacci de manière récursive.
-     *
-     * @param n La position du nombre de Fibonacci à calculer.
-     * @return Le nième nombre de Fibonacci.
-     */
+
     @Override
     public int fibonacci(int n) {
         if (n <= 1)
