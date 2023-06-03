@@ -1,4 +1,7 @@
+package timing;
+
 import fibonacci.FibonacciInterface;
+
 
 public class FibonacciTimingDecorator implements FibonacciInterface {
     private final FibonacciInterface fibonacciMethod;
