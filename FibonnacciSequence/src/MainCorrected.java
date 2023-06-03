@@ -21,25 +21,8 @@ public class MainCorrected {
                 continue;
             }
 
-            /*
-            FibonacciInterface fibonacciMethod = new Fibonacci();
-            FibonacciInterface fibonacciMethodRecursive = new FibonacciRecursive();
-
-            FibonacciInterface timedFibonacci = new FibonacciTimingDecorator(fibonacciMethod);
-            int resultat = timedFibonacci.fibonacci(n);
-
-            FibonacciInterface timedFibonacciRecursive = new FibonacciTimingDecorator(fibonacciMethodRecursive);
-            int resultatRecursive = timedFibonacciRecursive.fibonacci(n);
-*/
-
-            /*
-            FibonacciInterface timedFibonacci = new FibonacciTimingDecorator(new Fibonacci()).fibonacci(n);
-            FibonacciInterface timedFibonacciRecursive = new FibonacciTimingDecorator(new FibonacciRecursive()).fibonacci(n);
-*/
             int resultat = new FibonacciTimingDecorator(new Fibonacci()).fibonacci(n);
             int resultatRecursive = new FibonacciTimingDecorator(new FibonacciRecursive()).fibonacci(n);
-
-
 
             System.out.println("Le " + n + "ème nombre de Fibonacci est : " + resultat);
             System.out.println("Le " + n + "ème nombre de Fibonacci est : " + resultatRecursive);
