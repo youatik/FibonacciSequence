@@ -5,7 +5,6 @@ public class Fibonacci implements FibonacciInterface {
         return calculate(n - 1) + calculate(n - 2);
     }
 
-
     @Override
     public int fibonacci(int n) {
         return calculate(n);
