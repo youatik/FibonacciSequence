@@ -3,19 +3,23 @@ package timeFormatting;
 
 public class TimeFormatter {
     public String formatExecutionTime(long executionTime) {
+        String unit;
+        double timeValue = executionTime;
+
         if (executionTime < 1_000) {
-            return formatWithDecimal(executionTime) + " nanoseconds";
+            unit = "nanoseconds";
         } else if (executionTime < 1_000_000) {
-            return formatWithDecimal((double) executionTime / 1_000) + " microseconds";
+            unit = "microseconds";
+            timeValue = executionTime / 1_000.0;
         } else if (executionTime < 1_000_000_000) {
-            return formatWithDecimal((double) executionTime / 1_000_000) + " milliseconds";
+            unit = "milliseconds";
+            timeValue = executionTime / 1_000_000.0;
         } else {
-            return formatWithDecimal((double) executionTime / 1_000_000_000) + " seconds";
+            unit = "seconds";
+            timeValue = executionTime / 1_000_000_000.0;
         }
-    }
 
-    private String formatWithDecimal(double value) {
-        return String.format("%.2f", value);
+        return String.format("%.2f %s", timeValue, unit);
     }
-
 }
+
