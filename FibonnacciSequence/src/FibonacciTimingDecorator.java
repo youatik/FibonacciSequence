@@ -1,3 +1,5 @@
+import fibonacci.FibonacciInterface;
+
 public class FibonacciTimingDecorator implements FibonacciInterface {
     private final FibonacciInterface fibonacciMethod;
     private final String objectName;

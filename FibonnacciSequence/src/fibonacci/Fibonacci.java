@@ -1,3 +1,5 @@
+package fibonacci;
+
 public class Fibonacci implements FibonacciInterface {
     private int calculate(int n) {
         if (n <= 1)
