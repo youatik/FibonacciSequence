@@ -1,5 +1,7 @@
 package fibonacci;
 
+import java.util.concurrent.ExecutionException;
+
 public class TimingDecorator implements FibonacciInterface {
     private FibonacciInterface fibonacciObject;
     private String objectName;
@@ -10,7 +12,7 @@ public class TimingDecorator implements FibonacciInterface {
     }
 
     @Override
-    public long fibonacci(int n) {
+    public long fibonacci(int n) throws ExecutionException, InterruptedException {
         long startTime = System.nanoTime();
         long result = fibonacciObject.fibonacci(n);
         long endTime = System.nanoTime();

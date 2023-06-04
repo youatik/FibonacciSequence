@@ -1,9 +1,11 @@
 import java.util.Scanner;
+import java.util.concurrent.ExecutionException;
+
 import fibonacci.*;
 import timing.FibonacciTimingDecorator;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ExecutionException, InterruptedException {
         Scanner scanner = new Scanner(System.in);
 
         while (true) {

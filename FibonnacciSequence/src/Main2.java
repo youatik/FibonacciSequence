@@ -1,9 +1,11 @@
 import java.util.Scanner;
+import java.util.concurrent.ExecutionException;
+
 import fibonacci.*;
 import timing.FibonacciTimingDecorator;
 
 public class Main2 {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ExecutionException, InterruptedException {
         FibonacciInterface fibonacci = new Fibonacci();
         FibonacciInterface fibonacciRecursive = new FibonacciRecursive();
 
@@ -11,14 +13,24 @@ public class Main2 {
         fibonacciComposite.addFibonacciObject(fibonacci);
         fibonacciComposite.addFibonacciObject(fibonacciRecursive);
 
-        int n = 12;
+        Scanner scanner = new Scanner(System.in);
+        int n = 0;
 
-        long result = fibonacciComposite.fibonacci(n);
+        while (n != -1) {
+            System.out.print("Enter the value of n (-1 to exit): ");
+            n = scanner.nextInt();
 
-        if (result == -1) {
-            System.out.println("Results are not equal");
-        } else {
-            System.out.println("The Fibonacci result is: " + result);
+            if (n == -1) {
+                break;
+            }
+
+            long result = fibonacciComposite.fibonacci(n);
+
+            if (result == -1) {
+                System.out.println("Results are not equal");
+            } else {
+                System.out.println("The Fibonacci result is: " + result);
+            }
         }
     }
 }
