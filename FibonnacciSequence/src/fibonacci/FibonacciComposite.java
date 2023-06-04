@@ -1,7 +1,10 @@
 package fibonacci;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.*;
+
+import timeFormatting.TimeFormatter;
 
 public class FibonacciComposite implements FibonacciInterface {
     private List<FibonacciInterface> fibonacciObjects;
@@ -19,15 +22,13 @@ public class FibonacciComposite implements FibonacciInterface {
         ExecutorService executorService = Executors.newFixedThreadPool(fibonacciObjects.size());
         List<Future<Result>> results = new ArrayList<>();
 
-        for (FibonacciInterface fibonacciObject : fibonacciObjects)
-        {
-            Callable<Result> task = () ->
-            {
+        for (FibonacciInterface fibonacciObject : fibonacciObjects) {
+            Callable<Result> task = () -> {
                 long startTime = System.nanoTime();
                 long result = fibonacciObject.fibonacci(n);
                 long endTime = System.nanoTime();
                 long executionTime = endTime - startTime;
-                return new Result(result, executionTime);
+                return new Result(result, executionTime, fibonacciObject);
             };
             Future<Result> result = executorService.submit(task);
             results.add(result);
@@ -47,32 +48,46 @@ public class FibonacciComposite implements FibonacciInterface {
             if (fibonacciResult.getResult() != firstResult) {
                 return -1; // Results are not equal, return -1
             }
-            System.out.println("Execution time for Fibonacci object: " + fibonacciResult.getExecutionTime() + " nanoseconds");
+            TimeFormatter timeFormatter = new TimeFormatter();
+            String formattedTime = timeFormatter.formatExecutionTime(fibonacciResult.getExecutionTime());
+            System.out.println("Execution time for " + fibonacciResult.getFibonacciObject().getClass().getSimpleName() + " object: " + formattedTime);
         }
 
         return firstResult; // Results are equal, return the result
     }
 
-    private static class Result
-    {
+    @Override
+    public List<Long> getFibonacciSequence() {
+        if (fibonacciObjects.isEmpty()) {
+            return new ArrayList<>();
+        }
+        return fibonacciObjects.get(0).getFibonacciSequence();
+    }
+
+    private static class Result {
         private final long result;
         private final long executionTime;
+        private final FibonacciInterface fibonacciObject;
 
-        public Result(long result, long executionTime)
-        {
+        public Result(long result, long executionTime, FibonacciInterface fibonacciObject) {
             this.result = result;
             this.executionTime = executionTime;
+            this.fibonacciObject = fibonacciObject;
         }
 
-        public long getResult()
-        {
+        public long getResult() {
             return result;
         }
 
-        public long getExecutionTime()
-        {
+        public long getExecutionTime() {
             return executionTime;
         }
+
+        public FibonacciInterface getFibonacciObject() {
+            return fibonacciObject;
+        }
+    }
+    public void clearFibonacciObjects() {
+        fibonacciObjects.clear();
     }
 }
-

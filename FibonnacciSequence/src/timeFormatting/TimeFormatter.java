@@ -1,6 +1,5 @@
 package timeFormatting;
 
-
 public class TimeFormatter {
     public String formatExecutionTime(long executionTime) {
         String unit;
