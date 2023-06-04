@@ -13,8 +13,17 @@ public class Main {
                 break;
             }
 
-            System.out.println("Le " + n + "ème nombre de Fibonacci est : " + new FibonacciTimingDecorator(new Fibonacci()).fibonacci(n));
-            System.out.println("Le " + n + "ème nombre de Fibonacci Récursif est : " + new FibonacciTimingDecorator(new FibonacciRecursive()).fibonacci(n));
+            FibonacciInterface fibonacci = new Fibonacci();
+            FibonacciInterface fibonacciRecursive = new FibonacciRecursive();
+
+            FibonacciInterface fibonacciWithTiming = new FibonacciTimingDecorator(fibonacci);
+            FibonacciInterface fibonacciRecursiveWithTiming = new FibonacciTimingDecorator(fibonacciRecursive);
+
+            long resultat = fibonacciWithTiming.fibonacci(n);
+            long resultatRecursive = fibonacciRecursiveWithTiming.fibonacci(n);
+
+            System.out.println("Le " + n + "ème nombre de Fibonacci est : " + resultat);
+            System.out.println("Le " + n + "ème nombre de Fibonacci Récursif est : " + resultatRecursive);
         }
 
 
