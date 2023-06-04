@@ -1,7 +1,7 @@
 package timing;
 
 import fibonacci.FibonacciInterface;
-import timeFormatting.*;
+import timeFormatting.TimeFormatter;
 
 public class FibonacciTimingDecorator implements FibonacciInterface {
     private final FibonacciInterface fibonacciMethod;
@@ -26,4 +26,3 @@ public class FibonacciTimingDecorator implements FibonacciInterface {
         return result;
     }
 }
-
