@@ -1,6 +1,7 @@
 package fibonacci;
 
+
 public interface FibonacciInterface {
-    int fibonacci(int n);
+    long fibonacci(int n);
 }
 

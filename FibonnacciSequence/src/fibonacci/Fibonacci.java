@@ -1,26 +1,43 @@
 package fibonacci;
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class Fibonacci implements FibonacciInterface {
-    private int calculate(int n) {
-        if (n <= 1) {
-            return n;
-        }
+    private List<Long> fibonacciSequence;
 
-        int prev = 0;
-        int curr = 1;
-
-        for (int i = 2; i <= n; i++) {
-            int next = prev + curr;
-            prev = curr;
-            curr = next;
-        }
-
-        return curr;
+    public Fibonacci() {
+        fibonacciSequence = new ArrayList<>();
+        fibonacciSequence.add(0L); // Adding the initial Fibonacci value of 0
+        fibonacciSequence.add(1L); // Adding the initial Fibonacci value of 1
     }
+
+
+    private long calculate(int n) {
+        if (n < fibonacciSequence.size()) {
+            return fibonacciSequence.get(n);
+        }
+
+        for (int i = fibonacciSequence.size(); i <= n; i++) {
+            long fibValue = fibonacciSequence.get(i - 1) + fibonacciSequence.get(i - 2);
+            fibonacciSequence.add(fibValue);
+        }
+
+        return fibonacciSequence.get(n);
+    }
+
 
     @Override
-    public int fibonacci(int n) {
+    public long fibonacci(int n) {
+        if (n < 0) {
+            throw new IllegalArgumentException("Input must be a non-negative integer");
+        }
+
         return calculate(n);
     }
-}
 
+
+    public List<Long> getFibonacciSequence() {
+        return fibonacciSequence;
+    }
+}
