@@ -1,7 +1,11 @@
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.ExecutionException;
 import fibonacci.*;
+import result.Result;
+import timeFormatting.TimeFormatter;
 
 public class Main {
     public static void main(String[] args) throws ExecutionException, InterruptedException {
@@ -19,24 +23,47 @@ public class Main {
             }
 
             fibonacciComposite.clearFibonacciObjects();
+            initializeFibonacciAlgorithms(fibonacciComposite);
 
-            FibonacciInterface fibonacci = new Fibonacci();
-            FibonacciInterface fibonacciRecursive = new FibonacciRecursive();
+            fibonacciComposite.fibonacci(n);
 
-            fibonacciComposite.addFibonacciObject(fibonacci);
-            fibonacciComposite.addFibonacciObject(fibonacciRecursive);
+            List<Result> resultObjects = fibonacciComposite.getResultObjects();
+            TimeFormatter timeFormatter = new TimeFormatter();
 
-            long result = fibonacciComposite.fibonacci(n);
+            printExecutionTimes(resultObjects, timeFormatter);
+            printFibonacciSequences(resultObjects);
+            printFastestObject(resultObjects);
+        }
+    }
 
-            if (result == -1) {
-                System.out.println("Results are not equal");
-            } else {
-                System.out.println("The Fibonacci result is: " + result);
-            }
+    private static void initializeFibonacciAlgorithms(FibonacciComposite fibonacciComposite) {
+        FibonacciInterface fibonacci = new Fibonacci();
+        FibonacciInterface fibonacciRecursive = new FibonacciRecursive();
+        fibonacciComposite.addFibonacciObject(fibonacci);
+        fibonacciComposite.addFibonacciObject(fibonacciRecursive);
+    }
 
-            List<Long> fibonacciSequence = fibonacci.getFibonacciSequence();
-            System.out.println("Fibonacci sequence: " + fibonacciSequence);
+    private static void printExecutionTimes(List<Result> resultObjects, TimeFormatter timeFormatter) {
+        System.out.println("Execution Times:");
+        for (Result resultObject : resultObjects) {
+            String fibonacciObjectName = resultObject.getFibonacciObject().getClass().getSimpleName();
+            String executionTime = timeFormatter.formatExecutionTime(resultObject.getExecutionTime());
+            System.out.println("Fibonacci Object: " + fibonacciObjectName + ", Execution Time: " + executionTime);
+        }
+    }
 
-             }
+    private static void printFibonacciSequences(List<Result> resultObjects) {
+        System.out.println("Fibonacci Sequences:");
+        for (Result resultObject : resultObjects) {
+            String fibonacciObjectName = resultObject.getFibonacciObject().getClass().getSimpleName();
+            List<Long> fibonacciSequence = resultObject.getFibonacciObject().getFibonacciSequence();
+            System.out.println("Fibonacci Object: " + fibonacciObjectName + ", Fibonacci Sequence: " + fibonacciSequence);
+        }
+    }
+
+    private static void printFastestObject(List<Result> resultObjects) {
+        Result fastestResult = Collections.min(resultObjects, Comparator.comparingLong(Result::getExecutionTime));
+        String fastestObjectName = fastestResult.getFibonacciObject().getClass().getSimpleName();
+        System.out.println("The fastest object is: " + fastestObjectName);
     }
 }
