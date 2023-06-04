@@ -1,31 +1,28 @@
 package fibonacci;
-import fibonacci.FibonacciInterface;
-import java.util.HashMap;
-import java.util.Map;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class FibonacciComposite implements FibonacciInterface {
-    private final Map<FibonacciInterface, Long> resultsMap;
+    private List<FibonacciInterface> fibonacciObjects;
 
     public FibonacciComposite() {
-        resultsMap = new HashMap<>();
+        fibonacciObjects = new ArrayList<>();
     }
 
     public void addFibonacciObject(FibonacciInterface fibonacciObject) {
-        resultsMap.put(fibonacciObject, null);
-    }
-
-    public Map<FibonacciInterface, Long> getResultsMap() {
-        return resultsMap;
+        fibonacciObjects.add(fibonacciObject);
     }
 
     @Override
     public long fibonacci(int n) {
-        for (FibonacciInterface fibonacciObject : resultsMap.keySet()) {
-            if (resultsMap.get(fibonacciObject) == null) {
-                long result = fibonacciObject.fibonacci(n);
-                resultsMap.put(fibonacciObject, result);
+        long result = fibonacciObjects.get(0).fibonacci(n); // Get the result from the first Fibonacci object
+        for (int i = 1; i < fibonacciObjects.size(); i++) {
+            long currentResult = fibonacciObjects.get(i).fibonacci(n);
+            if (currentResult != result) {
+                return -1; // Results are not equal, return -1
             }
         }
-        return 0L; // Placeholder return statement, modify as needed
+        return result; // Results are equal, return the result
     }
 }
