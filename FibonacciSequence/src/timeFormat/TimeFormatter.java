@@ -1,3 +1,5 @@
+package timeFormat;
+
 public class TimeFormatter {
     public static String formatExecutionTime(long executionTime) {
         if (executionTime >= 1_000_000_000) {

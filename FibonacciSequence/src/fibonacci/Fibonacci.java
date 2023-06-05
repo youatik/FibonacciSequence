@@ -1,3 +1,5 @@
+package fibonacci;
+
 import java.util.List;
 
 public interface Fibonacci {
