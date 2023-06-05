@@ -65,11 +65,6 @@ public class FibonacciComposite implements FibonacciInterface {
         return fibonacciObjects.get(0).getFibonacciSequence();
     }
 
-    public void clearFibonacciObjects() {
-        fibonacciObjects.clear();
-        resultObjects.clear(); // Clear the result objects list
-    }
-
     public List<Result> getResultObjects() {
         return resultObjects; // Accessor method for the result objects list
     }

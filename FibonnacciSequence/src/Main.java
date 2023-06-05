@@ -6,11 +6,8 @@ import java.util.concurrent.ExecutionException;
 import fibonacci.*;
 import result.Result;
 import timeFormatting.TimeFormatter;
-
 public class Main {
     public static void main(String[] args) throws ExecutionException, InterruptedException {
-        FibonacciComposite fibonacciComposite = new FibonacciComposite();
-
         Scanner scanner = new Scanner(System.in);
         int n = 0;
 
@@ -22,15 +19,12 @@ public class Main {
                 break;
             }
 
-            fibonacciComposite.clearFibonacciObjects();
+            FibonacciComposite fibonacciComposite = new FibonacciComposite();
             initializeFibonacciAlgorithms(fibonacciComposite);
-
             fibonacciComposite.fibonacci(n);
-
             List<Result> resultObjects = fibonacciComposite.getResultObjects();
-            TimeFormatter timeFormatter = new TimeFormatter();
 
-            printExecutionTimes(resultObjects, timeFormatter);
+            printExecutionTimes(resultObjects);
             printFibonacciSequences(resultObjects);
             printFastestObject(resultObjects);
         }
@@ -43,7 +37,8 @@ public class Main {
         fibonacciComposite.addFibonacciObject(fibonacciRecursive);
     }
 
-    private static void printExecutionTimes(List<Result> resultObjects, TimeFormatter timeFormatter) {
+    private static void printExecutionTimes(List<Result> resultObjects) {
+        TimeFormatter timeFormatter = new TimeFormatter();
         System.out.println("Execution Times:");
         for (Result resultObject : resultObjects) {
             String fibonacciObjectName = resultObject.getFibonacciObject().getClass().getSimpleName();
