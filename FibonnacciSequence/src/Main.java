@@ -6,8 +6,10 @@ import java.util.concurrent.ExecutionException;
 import fibonacci.*;
 import result.Result;
 import timeFormatting.TimeFormatter;
+
 public class Main {
     public static void main(String[] args) throws ExecutionException, InterruptedException {
+        //TimeFormatter timeFormatter = new TimeFormatter();
         Scanner scanner = new Scanner(System.in);
         int n = 0;
 
@@ -39,6 +41,7 @@ public class Main {
 
     private static void printExecutionTimes(List<Result> resultObjects) {
         TimeFormatter timeFormatter = new TimeFormatter();
+
         System.out.println("Execution Times:");
         for (Result resultObject : resultObjects) {
             String fibonacciObjectName = resultObject.getFibonacciObject().getClass().getSimpleName();
