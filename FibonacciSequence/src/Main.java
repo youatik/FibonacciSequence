@@ -36,7 +36,8 @@ public class Main {
                     ExecutionResult result = executionResults.get(i);
                     Fibonacci algorithm = compositeFibonacci.getAlgorithms().get(i);
                     long executionTime = result.getExecutionTime();
-                    System.out.println(algorithm.getClass().getSimpleName() + " execution time: " + executionTime + "ns");
+                    String formattedTime = TimeFormatter.formatExecutionTime(executionTime);
+                    System.out.println(algorithm.getClass().getSimpleName() + " execution time: " + formattedTime);
                 }
             }
         }
