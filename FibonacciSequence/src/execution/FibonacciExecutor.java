@@ -15,12 +15,14 @@ public class FibonacciExecutor {
         this.executionResults = new ArrayList<>();
     }
 
+    // Exécute les algorithmes de Fibonacci en parallèle et récupère les résultats
     public List<List<Long>> execute(int n) {
         List<List<Long>> results = new ArrayList<>();
 
         ExecutorService executorService = Executors.newFixedThreadPool(compositeAlgorithm.getAlgorithms().size());
         List<Future<ExecutionResult>> futures = new ArrayList<>();
 
+        // Exécute chaque algorithme de Fibonacci dans un Callable en parallèle
         for (Fibonacci algorithm : compositeAlgorithm.getAlgorithms()) {
             Callable<ExecutionResult> callable = () -> {
                 long startTime = System.nanoTime();
@@ -35,6 +37,7 @@ public class FibonacciExecutor {
             futures.add(future);
         }
 
+        // Récupère les résultats des tâches futures et les ajoute à la liste des résultats
         for (Future<ExecutionResult> future : futures) {
             try {
                 ExecutionResult result = future.get();
@@ -51,6 +54,7 @@ public class FibonacciExecutor {
         return results;
     }
 
+    // Récupère les résultats d'exécution pour chaque algorithme
     public List<ExecutionResult> getExecutionResults() {
         return executionResults;
     }
