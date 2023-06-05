@@ -9,7 +9,7 @@ import timeFormatting.TimeFormatter;
 
 public class Main {
     public static void main(String[] args) throws ExecutionException, InterruptedException {
-        //TimeFormatter timeFormatter = new TimeFormatter();
+        TimeFormatter timeFormatter = new TimeFormatter();
         Scanner scanner = new Scanner(System.in);
         int n = 0;
 
@@ -26,7 +26,7 @@ public class Main {
             fibonacciComposite.fibonacci(n);
             List<Result> resultObjects = fibonacciComposite.getResultObjects();
 
-            printExecutionTimes(resultObjects);
+            printExecutionTimes(resultObjects, timeFormatter);
             printFibonacciSequences(resultObjects);
             printFastestObject(resultObjects);
         }
@@ -39,9 +39,7 @@ public class Main {
         fibonacciComposite.addFibonacciObject(fibonacciRecursive);
     }
 
-    private static void printExecutionTimes(List<Result> resultObjects) {
-        TimeFormatter timeFormatter = new TimeFormatter();
-
+    private static void printExecutionTimes(List<Result> resultObjects, TimeFormatter timeFormatter) {
         System.out.println("Execution Times:");
         for (Result resultObject : resultObjects) {
             String fibonacciObjectName = resultObject.getFibonacciObject().getClass().getSimpleName();
