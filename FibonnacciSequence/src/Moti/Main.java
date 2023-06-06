@@ -1,4 +1,4 @@
-package Tim;
+package Moti;
 
 
 import java.util.Scanner;
