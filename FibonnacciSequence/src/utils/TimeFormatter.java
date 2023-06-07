@@ -12,7 +12,6 @@ public  class TimeFormatter {
         // Affichage des résultats pour la version récursive.
         System.out.println("Fibonacci Récursive");
         System.out.println(recursiveTime + " microsecondes");
-        printArray(displayRecursive);
         if(displayRecursive.length < 93) {
             printArray(displayRecursive);
         } else {
