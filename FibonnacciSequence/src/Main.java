@@ -33,6 +33,7 @@ public class Main {
                             // GO!    <- Demarrage de tous les threads en même temps
         executor.shutdown();
         try {
+            //On attend que les 2 aient fini
             executor.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
         } catch (InterruptedException e) {
             e.printStackTrace();
