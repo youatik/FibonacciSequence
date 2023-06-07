@@ -1,3 +1,4 @@
+import utils.FibonacciRunner;
 import utils.TimeFormatter;
 import fibonacci.Fibonacci;
 import fibonacci.RecursiveFibonacci;
@@ -10,42 +11,67 @@ import java.util.concurrent.TimeUnit;
 
 
 //OverFlow à partir du 93e index
+import java.util.InputMismatchException;
+import java.util.Scanner;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+
 public class Main {
-    public static void main(String[] args) throws InterruptedException {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Entrez the n-ième index voulu de la suite de Fibonacci:");
-        int n = scanner.nextInt();
+        public static void main(String[] args) {
+            Scanner scanner = new Scanner(System.in);
+            int option = 0;
+            do {
+                // Affichage du menu
+                System.out.println("\nMenu:");
+                System.out.println("1. Executez Fibonacci.");
+                System.out.println("2. Quitter.");
+                System.out.print("Choisissez une option: ");
 
-        //Préparation des ressources
-        CountDownLatch synchro = new CountDownLatch(3);
-        ExecutorService executor = Executors.newFixedThreadPool(2);
+                try {
+                    // Récupération de l'option choisie par l'utilisateur
+                    option = scanner.nextInt();
+                } catch (InputMismatchException ime) {
+                    System.out.println("Veuillez entrer un nombre entier valide.");
+                    scanner.next();
+                    continue;
+                }
 
-        //Préparation des threads:
-        Fibonacci fib = new Fibonacci(n, synchro);
-        RecursiveFibonacci fibRec = new RecursiveFibonacci(n, synchro);
-        executor.execute(fib);    //On met en place les threads
-        executor.execute(fibRec);
+                switch (option) {
+                    case 1:
+                        System.out.println("Entrez l'indice n-ième voulu de la suite de Fibonacci:");
+                        int n;
+                        try {
+                            // Récupération de l'indice de la suite de Fibonacci
+                            n = scanner.nextInt();
+                            if (n < 0) {
+                                System.out.println("Veuillez entrer un nombre entier positif.");
+                                continue;
+                            }
+                        } catch (InputMismatchException ime) {
+                            System.out.println("Veuillez entrer un nombre entier valide.");
+                            scanner.next();
+                            continue;
+                        }
 
-        //
-        synchro.countDown();  // 1
-        synchro.countDown();  // 2
-        synchro.countDown();  // 3
-                            // GO!    <- Demarrage de tous les threads en même temps
-        executor.shutdown();
-        try {
-            executor.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+                        // Création et exécution du runner Fibonacci
+                        FibonacciRunner gameEngine = new FibonacciRunner();
+                        gameEngine.run(n);
+                        break;
+                    case 2:
+                        // Sortie du programme
+                        System.out.println("Sortie du programme.");
+                        break;
+                    default:
+                        // Gestion des options invalides
+                        System.out.println("Option invalide. Veuillez réessayer.");
+                }
+            } while (option != 2);
+
+            // Fermeture du scanner après utilisation
+            scanner.close();
         }
-
-        //On récupère les résultats d'exécution
-        long fibResult = fib.getResultTime();
-        long fibRecResult = fibRec.getResultTime();
-        long[] fibDisplay = fib.getDisplay();
-        long[] fibRecDisplay = fibRec.getDisplay();
-
-        //Formattage de la sortie en console
-        TimeFormatter formattage = new TimeFormatter();
-        formattage.printFormatted(fibDisplay, fibResult, fibRecDisplay, fibRecResult);
     }
-}
+
+
