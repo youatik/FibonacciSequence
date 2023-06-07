@@ -13,12 +13,21 @@ public  class TimeFormatter {
         System.out.println("Fibonacci Récursive");
         System.out.println(recursiveTime + " microsecondes");
         printArray(displayRecursive);
+        if(displayRecursive.length < 93) {
+            printArray(displayRecursive);
+        } else {
+            System.out.println("StackOverflow, Données erronées");
+        }
         System.out.println("=============================");
 
         // Affichage des résultats pour la version itérative.
         System.out.println("Fibonacci Itérative");
         System.out.println(iterativeTime + " microsecondes");
-        printArray(display);
+        if(display.length < 93) {
+            printArray(display);
+        } else {
+            System.out.println("StackOverflow, Données erronées");
+        }
         System.out.println("=============================");
 
         // Détermination et affichage de la méthode la plus rapide.
