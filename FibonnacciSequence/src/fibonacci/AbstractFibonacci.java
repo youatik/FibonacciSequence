@@ -2,7 +2,7 @@ package fibonacci;
 
 import java.util.concurrent.CountDownLatch;
 
-// Cette classe est une classe abstraite représentant une implémentation de base du calcul de la suite de Fibonacci.
+// Cette classe est une classe abstraite représentant une implémentation de base de la suite de Fibonacci.
 public abstract class AbstractFibonacci implements Runnable{
 
     // Le n-ième nombre dans la suite de Fibonacci à calculer.
@@ -33,5 +33,5 @@ public abstract class AbstractFibonacci implements Runnable{
     }
 
     // Cette méthode doit être implémentée dans une sous-classe pour calculer la suite de Fibonacci.
-    protected abstract long[] fib(int n);
+    protected abstract long[] calculateFibonacciSequence(int n);
 }
