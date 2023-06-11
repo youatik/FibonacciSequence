@@ -2,25 +2,44 @@ package fibonacci;
 
 import java.util.concurrent.CountDownLatch;
 
+/**
+ * La classe Fibonacci représente une version itérative du calcul de la suite de Fibonacci.
+ * Elle étend la classe abstraite AbstractFibonacci.
+ */
 public class Fibonacci extends AbstractFibonacci {
 
+    /**
+     * Constructeur de la classe Fibonacci.
+     *
+     * @param n       l'indice n-ième de la suite de Fibonacci à calculer
+     * @param synchro un compte à rebours utilisé pour synchroniser les threads
+     */
     public Fibonacci(int n, CountDownLatch synchro) {
         super(n, synchro);
     }
 
+    /**
+     * Méthode qui exécute le calcul de la suite de Fibonacci de manière itérative.
+     */
     @Override
     public void run() {
         try {
             synchro.await();  // On attend que tous les threads soient prêts
-            long start = System.nanoTime(); //Temps avant l'execution
+            long start = System.nanoTime(); // Temps avant l'exécution
             this.display = fib(n);
-            long end = System.nanoTime(); //Temps après l'execution
+            long end = System.nanoTime(); // Temps après l'exécution
             this.resultTime = (end - start);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
 
+    /**
+     * Méthode qui calcule la suite de Fibonacci de manière itérative.
+     *
+     * @param n l'indice n-ième de la suite de Fibonacci
+     * @return un tableau contenant la suite de Fibonacci calculée
+     */
     @Override
     protected long[] fib(int n) {
         // Initialisation du tableau de la séquence.
