@@ -1,19 +1,27 @@
 package utils;
 
 // La classe TimeFormatter est responsable de l'affichage formaté des résultats.
-public  class TimeFormatter {
+public class TimeFormatter {
 
     // Cette méthode imprime les séquences de Fibonacci et les temps d'exécution pour les versions récursive et itérative.
+    /**
+     * Imprime les séquences de Fibonacci et les temps d'exécution pour les versions récursive et itérative.
+     *
+     * @param display            tableau des séquences de Fibonacci pour la version itérative
+     * @param nanoSeconds        temps d'exécution en nanosecondes pour la version itérative
+     * @param displayRecursive   tableau des séquences de Fibonacci pour la version récursive
+     * @param nanoSecondsRec     temps d'exécution en nanosecondes pour la version récursive
+     */
     public void printFormatted(long[] display, long nanoSeconds, long[] displayRecursive, long nanoSecondsRec) {
         // Conversion du temps d'exécution en microsecondes et formatage pour affichage.
-        String iterativeTime = String.format("%.2f", nanoSeconds / 1e3);
+        String iterativeTime = String.format("%.2f", nanoSeconds / 1e3); //1e3 est 1x10^3 ou 1000
         String recursiveTime = String.format("%.2f", nanoSecondsRec / 1e3);
 
         // Affichage des résultats pour la version récursive.
         System.out.println("Fibonacci Récursive");
         System.out.println(recursiveTime + " microsecondes");
         printArray(displayRecursive);
-        if(displayRecursive.length < 93) {
+        if (displayRecursive.length < 93) {
             printArray(displayRecursive);
         } else {
             System.out.println("StackOverflow, Données erronées");
@@ -23,7 +31,7 @@ public  class TimeFormatter {
         // Affichage des résultats pour la version itérative.
         System.out.println("Fibonacci Itérative");
         System.out.println(iterativeTime + " microsecondes");
-        if(display.length < 93) {
+        if (display.length < 93) {
             printArray(display);
         } else {
             System.out.println("StackOverflow, Données erronées");
@@ -36,6 +44,11 @@ public  class TimeFormatter {
     }
 
     // Cette méthode imprime un tableau de longues valeurs à la console.
+    /**
+     * Imprime un tableau de longues valeurs à la console.
+     *
+     * @param array le tableau de longues valeurs à imprimer
+     */
     private static void printArray(long[] array) {
         // Début de l'affichage du tableau.
         System.out.print("[");
