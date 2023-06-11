@@ -8,7 +8,15 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * La classe FibonacciRunner permet d'exécuter les calculs de la suite de Fibonacci de manière concurrente.
+ */
 public class FibonacciRunner {
+    /**
+     * Exécute les calculs de la suite de Fibonacci.
+     *
+     * @param n l'indice n-ième de la suite de Fibonacci à calculer
+     */
     public void run(int n) {
         // Préparation des ressources
         CountDownLatch synchro = new CountDownLatch(3);
@@ -44,4 +52,3 @@ public class FibonacciRunner {
         formattage.printFormatted(fibDisplay, fibResult, fibRecDisplay, fibRecResult);
     }
 }
-
