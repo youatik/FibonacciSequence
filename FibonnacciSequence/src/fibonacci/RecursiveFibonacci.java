@@ -2,17 +2,32 @@ package fibonacci;
 
 import java.util.concurrent.CountDownLatch;
 
+/**
+ * La classe RecursiveFibonacci représente une version récursive du calcul de la suite de Fibonacci.
+ * Elle étend la classe abstraite AbstractFibonacci.
+ */
 public class RecursiveFibonacci extends AbstractFibonacci {
+
+    /**
+     * Constructeur de la classe RecursiveFibonacci.
+     *
+     * @param n       l'indice n-ième de la suite de Fibonacci à calculer
+     * @param synchro un compte à rebours utilisé pour synchroniser les threads
+     */
     public RecursiveFibonacci(int n, CountDownLatch synchro) {
         super(n, synchro);
     }
+
+    /**
+     * Méthode qui exécute le calcul de la suite de Fibonacci de manière récursive.
+     */
     @Override
     public void run() {
         try {
             synchro.await();  // On attend que tous les threads soient prêts
-            long start = System.nanoTime(); //Temps avant l'execution
+            long start = System.nanoTime(); // Temps avant l'exécution
             this.display = fib(n);
-            long end = System.nanoTime(); //Temps après l'execution
+            long end = System.nanoTime(); // Temps après l'exécution
 
             resultTime = (end - start); //TimeFormatter.formatExecutionTime
         } catch (InterruptedException e) {
@@ -20,7 +35,12 @@ public class RecursiveFibonacci extends AbstractFibonacci {
         }
     }
 
-// Fonction principale pour obtenir la séquence de Fibonacci jusqu'à n.
+    /**
+     * Méthode qui calcule la suite de Fibonacci de manière récursive.
+     *
+     * @param n l'indice n-ième de la suite de Fibonacci
+     * @return un tableau contenant la suite de Fibonacci calculée
+     */
     @Override
     public long[] fib(int n) {
         // Initialisation du tableau de la séquence.
@@ -41,7 +61,13 @@ public class RecursiveFibonacci extends AbstractFibonacci {
         return sequence;
     }
 
-    // Fonction auxiliaire pour calculer la séquence de Fibonacci en utilisant la mémoïsation.
+    /**
+     * Méthode auxiliaire pour calculer la suite de Fibonacci en utilisant la mémoïsation.
+     *
+     * @param n    l'indice n-ième de la suite de Fibonacci
+     * @param memo un tableau utilisé pour stocker les valeurs déjà calculées
+     * @return la valeur de F(n)
+     */
     private long fib(int n, long[] memo) {
         // Cas de base : si n <= 1, la valeur est déjà en mémoire.
         if (n <= 1) {
