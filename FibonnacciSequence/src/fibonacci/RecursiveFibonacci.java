@@ -25,9 +25,9 @@ public class RecursiveFibonacci extends AbstractFibonacci {
     public void run() {
         try {
             synchro.await();  // On attend que tous les threads soient prêts
-            long start = System.nanoTime(); // Temps avant l'exécution
-            this.display = fib(n);
-            long end = System.nanoTime(); // Temps après l'exécution
+            long start = System.nanoTime(); //Temps avant l'execution
+            this.display = calculateFibonacciSequence(n);
+            long end = System.nanoTime(); //Temps après l'execution
 
             resultTime = (end - start); //TimeFormatter.formatExecutionTime
         } catch (InterruptedException e) {
@@ -42,11 +42,11 @@ public class RecursiveFibonacci extends AbstractFibonacci {
      * @return un tableau contenant la suite de Fibonacci calculée
      */
     @Override
-    public long[] fib(int n) {
+    public long[] calculateFibonacciSequence(int n) {
         // Initialisation du tableau de la séquence.
         long[] sequence = new long[n + 1];
 
-        // Initialisation des cas de base de la séquence de Fibonacci.
+        // Initialisation des cas de base de la séquence de IterativeFibonacci.
         if (n >= 0) {
             sequence[0] = 0; // F(0)
         }
@@ -55,11 +55,12 @@ public class RecursiveFibonacci extends AbstractFibonacci {
         }
 
         // Calcul du reste de la séquence.
-        fib(n, sequence);
+        calculateFibonacciTerms(n, sequence);
 
         // Renvoi de la séquence complète.
         return sequence;
     }
+
 
     /**
      * Méthode auxiliaire pour calculer la suite de Fibonacci en utilisant la mémoïsation.
@@ -68,7 +69,8 @@ public class RecursiveFibonacci extends AbstractFibonacci {
      * @param memo un tableau utilisé pour stocker les valeurs déjà calculées
      * @return la valeur de F(n)
      */
-    private long fib(int n, long[] memo) {
+    private long calculateFibonacciTerms(int n, long[] memo) {
+
         // Cas de base : si n <= 1, la valeur est déjà en mémoire.
         if (n <= 1) {
             return memo[n];
@@ -77,7 +79,7 @@ public class RecursiveFibonacci extends AbstractFibonacci {
         // Si la valeur n'est pas encore calculée, on le fait maintenant.
         else if (memo[n] == 0) {
             // Calcul de F(n) et mise en mémoire pour usage ultérieur.
-            memo[n] = fib(n - 1, memo) + fib(n - 2, memo);
+            memo[n] = calculateFibonacciTerms(n - 1, memo) + calculateFibonacciTerms(n - 2, memo);
         }
 
         // Renvoi de F(n).

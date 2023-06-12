@@ -1,45 +1,43 @@
 package utils;
 
-// La classe TimeFormatter est responsable de l'affichage formaté des résultats.
-public class TimeFormatter {
 
-    // Cette méthode imprime les séquences de Fibonacci et les temps d'exécution pour les versions récursive et itérative.
-    /**
-     * Imprime les séquences de Fibonacci et les temps d'exécution pour les versions récursive et itérative.
-     *
-     * @param display            tableau des séquences de Fibonacci pour la version itérative
-     * @param nanoSeconds        temps d'exécution en nanosecondes pour la version itérative
-     * @param displayRecursive   tableau des séquences de Fibonacci pour la version récursive
-     * @param nanoSecondsRec     temps d'exécution en nanosecondes pour la version récursive
-     */
-    public void printFormatted(long[] display, long nanoSeconds, long[] displayRecursive, long nanoSecondsRec) {
+/**
+ * La classe TimeFormatter est responsable de l'affichage formaté des résultats, en prenant les tableau d'affichage
+ *  ainsi que le temps d'exécution de chaque méthode.
+  */
+
+public  class TimeFormatter {
+
+    private static final int maximumIndex = 93;
+
+    // Cette méthode imprime les séquences de IterativeFibonacci et les temps d'exécution pour les versions récursive et itérative.
+    public void printFormatted(long[] display, long executionTimeIterative, long[] displayRecursive, long executionTimeRecursive) {
         // Conversion du temps d'exécution en microsecondes et formatage pour affichage.
-        String iterativeTime = String.format("%.2f", nanoSeconds / 1e3); //1e3 est 1x10^3 ou 1000
-        String recursiveTime = String.format("%.2f", nanoSecondsRec / 1e3);
+        String iterativeTime = String.format("%.2f", executionTimeIterative / 1e3);
+        String recursiveTime = String.format("%.2f", executionTimeRecursive / 1e3);
 
         // Affichage des résultats pour la version récursive.
         System.out.println("Fibonacci Récursive");
-        System.out.println(recursiveTime + " microsecondes");
-        printArray(displayRecursive);
-        if (displayRecursive.length < 93) {
+        System.out.println("Temps d'exécution: " + recursiveTime + " microsecondes");
+        if(displayRecursive.length < maximumIndex) {
             printArray(displayRecursive);
         } else {
-            System.out.println("StackOverflow, Données erronées");
+            System.out.println("À partir du 93e index, on ne peut représenter les données");
         }
         System.out.println("=============================");
 
         // Affichage des résultats pour la version itérative.
         System.out.println("Fibonacci Itérative");
-        System.out.println(iterativeTime + " microsecondes");
-        if (display.length < 93) {
+        System.out.println("Temps d'exécution: " + iterativeTime + " microsecondes");
+        if(display.length < 93) {
             printArray(display);
         } else {
-            System.out.println("StackOverflow, Données erronées");
+            System.out.println("À partir du 93e index, on ne peut représenter les données");
         }
         System.out.println("=============================");
 
         // Détermination et affichage de la méthode la plus rapide.
-        String winner = (nanoSeconds < nanoSecondsRec) ? "Itérative" : "Recursive";
+        String winner = (executionTimeIterative < executionTimeRecursive) ? "Itérative" : "Recursive";
         System.out.println("Gagnant : " + winner);
     }
 

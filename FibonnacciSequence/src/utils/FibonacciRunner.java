@@ -1,6 +1,6 @@
 package utils;
 
-import fibonacci.Fibonacci;
+import fibonacci.IterativeFibonacci;
 import fibonacci.RecursiveFibonacci;
 
 import java.util.concurrent.CountDownLatch;
@@ -8,8 +8,10 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
+
 /**
  * La classe FibonacciRunner permet d'exécuter les calculs de la suite de Fibonacci de manière concurrente.
+ * Elle envoie ensuite les résultats d'exécution à la classe de formattage
  */
 public class FibonacciRunner {
     /**
@@ -23,10 +25,10 @@ public class FibonacciRunner {
         ExecutorService executor = Executors.newFixedThreadPool(2);
 
         // Préparation des threads:
-        Fibonacci fib = new Fibonacci(n, synchro);
-        RecursiveFibonacci fibRec = new RecursiveFibonacci(n, synchro);
-        executor.execute(fib);    // On met en place les threads
-        executor.execute(fibRec);
+        IterativeFibonacci iterativeFibonacci = new IterativeFibonacci(n, synchro);
+        RecursiveFibonacci recursiveFibonacci = new RecursiveFibonacci(n, synchro);
+        executor.execute(iterativeFibonacci);    // On met en place les threads
+        executor.execute(recursiveFibonacci);
 
         synchro.countDown();  // 1
         synchro.countDown();  // 2
@@ -42,10 +44,10 @@ public class FibonacciRunner {
         }
 
         // On récupère les résultats d'exécution
-        long fibResult = fib.getResultTime();
-        long fibRecResult = fibRec.getResultTime();
-        long[] fibDisplay = fib.getDisplay();
-        long[] fibRecDisplay = fibRec.getDisplay();
+        long fibResult = iterativeFibonacci.getResultTime();
+        long fibRecResult = recursiveFibonacci.getResultTime();
+        long[] fibDisplay = iterativeFibonacci.getDisplay();
+        long[] fibRecDisplay = recursiveFibonacci.getDisplay();
 
         // Formattage de la sortie en console
         TimeFormatter formattage = new TimeFormatter();
