@@ -3,8 +3,8 @@ package fibonacci;
 import java.util.concurrent.CountDownLatch;
 
 /**
-<<<<<<< HEAD:FibonnacciSequence/src/fibonacci/IterativeFibonacci.java
- * Implémentation de la suite de fibonacci Itérative
+ * La classe RecursiveFibonacci représente une version récursive du calcul de la suite de Fibonacci.
+ * Elle étend la classe abstraite AbstractFibonacci.
  */
 
 public class IterativeFibonacci extends AbstractFibonacci {
