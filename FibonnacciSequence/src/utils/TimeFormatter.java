@@ -1,5 +1,6 @@
 package utils;
 
+
 /**
  * La classe TimeFormatter est responsable de l'affichage formaté des résultats, en prenant les tableau d'affichage
  *  ainsi que le temps d'exécution de chaque méthode.
@@ -41,6 +42,11 @@ public  class TimeFormatter {
     }
 
     // Cette méthode imprime un tableau de longues valeurs à la console.
+    /**
+     * Imprime un tableau de longues valeurs à la console.
+     *
+     * @param array le tableau de longues valeurs à imprimer
+     */
     private static void printArray(long[] array) {
         // Début de l'affichage du tableau.
         System.out.print("[");

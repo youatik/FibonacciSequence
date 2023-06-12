@@ -10,10 +10,15 @@ import java.util.concurrent.TimeUnit;
 
 
 /**
- * Cette classe permet de mettre en place les thread d'exécution pour les deux fonction de fibonacci.
+ * La classe FibonacciRunner permet d'exécuter les calculs de la suite de Fibonacci de manière concurrente.
  * Elle envoie ensuite les résultats d'exécution à la classe de formattage
  */
 public class FibonacciRunner {
+    /**
+     * Exécute les calculs de la suite de Fibonacci.
+     *
+     * @param n l'indice n-ième de la suite de Fibonacci à calculer
+     */
     public void run(int n) {
         // Préparation des ressources
         CountDownLatch synchro = new CountDownLatch(3);
@@ -49,4 +54,3 @@ public class FibonacciRunner {
         formattage.printFormatted(fibDisplay, fibResult, fibRecDisplay, fibRecResult);
     }
 }
-
